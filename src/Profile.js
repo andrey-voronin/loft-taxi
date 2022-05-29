@@ -1,23 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import {withAuth} from './AuthContext'
 
-const Profile = (props) => {
-    const {navigateTo} = props
-    
-    return <>
-    <h2>Регистрация пользователя</h2>
-    <form onSubmit={() => {navigateTo('map')}}>
-        <label htmlFor='user'>Пользователь</label>
-        <input type='text' name='user' id='user' size='15'/>
-        <label htmlFor='fullname'>Имя и фамилия</label>
-        <input type='text' name='fullname' id='fullname' size='15'/>
-        <label htmlFor='email'>E-mail</label>
-        <input type='email' name='email' id='email' size='15'/>                
-        <label htmlFor='password'>Пароль</label>
-        <input type='password' name='password' id='password' size='15'/>
-        <input type='submit' value='Зарегистрироваться' />
-        <button onClick={() => {navigateTo('login')}}>Войти</button>
-    </form>
-    </>
+class Profile extends React.Component {
+    static propTypes = {
+        navigateTo: PropTypes.func.isRequired
+    }
+
+    unauthenticate = () => {
+        this.props.logOut()
+        this.props.navigateTo('login')
+    }
+
+    render () {
+        return <>
+        <h2>Профиль пользователя</h2>
+        <button onClick={this.unauthenticate}>Выйти</button>
+        </>
+    }
 }
 
-export default Profile
+export const ProfileWithAuth = withAuth(Profile)

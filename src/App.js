@@ -1,24 +1,33 @@
 import React from 'react'
 import Map from './Map'
-import Login from './Login'
-import Profile from './Profile'
+import {LoginWithAuth} from './Login'
+import {ProfileWithAuth} from './Profile'
+import {withAuth} from './AuthContext'
 
 const PAGES = {
-  map: Map, 
-  login: Login,
-  profile: Profile
+  map: (props) => <Map {...props} />, 
+  login: (props) => <LoginWithAuth {...props} />,
+  profile: (props) => <ProfileWithAuth {...props} />
 }
 
 class App extends React.Component {
-  state = {currentPage: 'map'}
-
+  constructor(props) {
+    super(props)
+    this.state = {currentPage: 'login'}
+    this.navigateTo = this.navigateTo.bind(this)
+  }
+  
   navigateTo(page) {
-    this.setState({currentPage: page})
+    if(this.props.isLoggedIn) {
+      this.setState({currentPage: page})
+    } else {
+      this.setState({currentPage: 'login'})
+    }
+    
   }
 
   render() {
     const {currentPage} = this.state
-    const Page = PAGES[currentPage]
     return (
       <>
         <header>
@@ -26,13 +35,13 @@ class App extends React.Component {
             <ul>
               <li><button onClick={() => this.navigateTo('map')}>Карта</button></li>
               <li><button onClick={() => this.navigateTo('login')}>Войти</button></li>
-              <li><button onClick={() => this.navigateTo('profile')}>Регистрация</button></li>
+              <li><button onClick={() => this.navigateTo('profile')}>Профиль</button></li>
             </ul>
           </nav>
         </header>
         <main>
           <section>
-            <Page navigateTo={this.navigateTo.bind(this)} />
+            {PAGES[currentPage]({navigateTo: this.navigateTo})}
           </section>
         </main>
       </>
@@ -40,4 +49,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuth(App);
