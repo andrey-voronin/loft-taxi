@@ -15,11 +15,7 @@ class Login extends React.Component {
 
     render () {
         return <>
-        {this.props.isLoggedIn ? (
-            <p>
-                Вход выполнен <button onClick={() => {this.props.navigateTo('profile')}}>Редактировать профиль</button>
-            </p>
-        ) : (
+        {this.props.isLoggedIn ? this.props.navigateTo('map') : (
         <form onSubmit={this.authenticate}>
             <label htmlFor='email'>E-mail</label>
             <input type='text' name='email' id='email' size='15'/>

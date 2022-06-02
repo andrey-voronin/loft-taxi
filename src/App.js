@@ -33,9 +33,9 @@ class App extends React.Component {
         <header>
           <nav>
             <ul>
-              <li><button onClick={() => this.navigateTo('map')}>Карта</button></li>
-              <li><button onClick={() => this.navigateTo('login')}>Войти</button></li>
-              <li><button onClick={() => this.navigateTo('profile')}>Профиль</button></li>
+              {this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('map')}>Карта</button></li> : null}
+              {this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('profile')}>Профиль</button></li> : null}
+              {!this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('login')}>Войти</button></li> : null}              
             </ul>
           </nav>
         </header>
