@@ -1,13 +1,13 @@
 import React from 'react'
 import Map from './Map'
-import {LoginWithAuth} from './Login'
-import {ProfileWithAuth} from './Profile'
-import {withAuth} from './AuthContext'
+import { Login } from './Login'
+import { Profile } from './Profile'
+import { withAuth } from './AuthContext'
 
 const PAGES = {
   map: (props) => <Map {...props} />, 
-  login: (props) => <LoginWithAuth {...props} />,
-  profile: (props) => <ProfileWithAuth {...props} />
+  login: (props) => <Login {...props} />,
+  profile: (props) => <Profile {...props} />
 }
 
 class App extends React.Component {
@@ -16,7 +16,7 @@ class App extends React.Component {
     this.state = {currentPage: 'login'}
     this.navigateTo = this.navigateTo.bind(this)
   }
-  
+
   navigateTo(page) {
     if(this.props.isLoggedIn) {
       this.setState({currentPage: page})
@@ -49,4 +49,4 @@ class App extends React.Component {
   }
 }
 
-export default withAuth(App);
+export default withAuth(App)
