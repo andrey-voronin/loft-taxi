@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {withAuth} from './AuthContext'
+import { connect } from "react-redux"
+import { logOut } from "./actions"
 
 class Profile extends React.Component {
     static propTypes = {
@@ -20,4 +21,7 @@ class Profile extends React.Component {
     }
 }
 
-export const ProfileWithAuth = withAuth(Profile)
+export const ProfileWithAuth = connect(
+    null,
+    { logOut }
+)(Profile)
