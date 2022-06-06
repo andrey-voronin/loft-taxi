@@ -25,7 +25,7 @@ class Map extends React.Component {
 
     render() {
         return <>
-        <h2>Map</h2>
+        <h2>Карта</h2>
         <div className="map-wrapper">
             <div className="map" ref={this.mapContainer} />
         </div>
