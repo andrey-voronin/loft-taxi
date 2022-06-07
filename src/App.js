@@ -1,52 +1,30 @@
-import React from 'react'
+import React, { useState } from "react"
 import Map from './Map'
 import { Login } from './Login'
 import { Profile } from './Profile'
-import { withAuth } from './AuthContext'
+import { Header } from './Header'
 
 const PAGES = {
-  map: (props) => <Map {...props} />, 
+  map: (props) => <Map {...props} />,
   login: (props) => <Login {...props} />,
   profile: (props) => <Profile {...props} />
 }
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {currentPage: 'login'}
-    this.navigateTo = this.navigateTo.bind(this)
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('login')
+  const navigateTo = (page) => {
+    setCurrentPage(page)
   }
 
-  navigateTo(page) {
-    if(this.props.isLoggedIn) {
-      this.setState({currentPage: page})
-    } else {
-      this.setState({currentPage: 'login'})
-    }
-    
-  }
+  return <>
+    <Header navigateTo={navigateTo} />
+    <main>
+      <section>
+        {PAGES[currentPage]({ navigateTo })}
+      </section>
+    </main>
+  </>
 
-  render() {
-    const {currentPage} = this.state
-    return (
-      <>
-        <header>
-          <nav>
-            <ul>
-              {this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('map')}>Карта</button></li> : null}
-              {this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('profile')}>Профиль</button></li> : null}
-              {!this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('login')}>Войти</button></li> : null}              
-            </ul>
-          </nav>
-        </header>
-        <main>
-          <section>
-            {PAGES[currentPage]({navigateTo: this.navigateTo})}
-          </section>
-        </main>
-      </>
-    )
-  }
 }
 
-export default withAuth(App)
+export default App
