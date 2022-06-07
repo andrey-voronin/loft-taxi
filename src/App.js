@@ -3,45 +3,29 @@ import Map from './Map'
 import { LoginWithAuth } from './Login'
 import { ProfileWithAuth } from './Profile'
 import { connect } from "react-redux"
-
-const PAGES = {
-  map: (props) => <Map {...props} />,
-  login: (props) => <LoginWithAuth {...props} />,
-  profile: (props) => <ProfileWithAuth {...props} />
-}
+import { Link, Route, Switch } from "react-router-dom"
+import {PrivateRoute} from "./PrivateRoute"
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { currentPage: 'login' }
-    this.navigateTo = this.navigateTo.bind(this)
-  }
-
-  navigateTo(page) {
-    if (this.props.isLoggedIn) {
-      this.setState({ currentPage: page })
-    } else {
-      this.setState({ currentPage: 'login' })
-    }
-
-  }
-
   render() {
-    const { currentPage } = this.state
     return (
       <>
         <header>
           <nav>
             <ul>
-              {this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('map')}>Карта</button></li> : null}
-              {this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('profile')}>Профиль</button></li> : null}
-              {!this.props.isLoggedIn ? <li><button onClick={() => this.navigateTo('login')}>Войти</button></li> : null}
+              <li><Link to="/">Вход</Link></li>
+              <li><Link to="/map">Карта</Link></li>
+              <li><Link to="/profile">Профиль</Link></li>
             </ul>
           </nav>
         </header>
         <main>
           <section>
-            {PAGES[currentPage]({ navigateTo: this.navigateTo })}
+            <Switch>
+              <Route exact path="/" component={LoginWithAuth} />
+              <PrivateRoute path="/map" component={Map} />
+              <PrivateRoute path="/profile" component={ProfileWithAuth} />
+            </Switch>
           </section>
         </main>
       </>
