@@ -1,12 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import mapboxgl from 'mapbox-gl'
 
 class Map extends React.Component {
-    static propTypes = {
-        navigateTo: PropTypes.func.isRequired
-    }
-
     mapContainer = React.createRef()
     
     componentDidMount() {
@@ -16,16 +11,16 @@ class Map extends React.Component {
             style: 'mapbox://styles/mapbox/streets-v9',
             center: [60.58333, 56.83333],
             zoom: 12
-        })
+        })        
     }
 
     componentWillUnmount() {
-        this.map.remove()
+        if(this.map.remove)this.map.remove()
     }
 
     render() {
         return <>
-        <h2>Map</h2>
+        <h2>Карта</h2>
         <div className="map-wrapper">
             <div className="map" ref={this.mapContainer} />
         </div>
