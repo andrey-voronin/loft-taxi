@@ -16,20 +16,15 @@ const App = () => {
   const navigateTo = (page) => {
     setCurrentPage(page)
   }
-  const auth_context = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext)
 
   useEffect(() => {
-    if(auth_context.isLoggedIn) {
-      if(currentPage === 'login') {
-        setCurrentPage('map')
-      }
-    } else {
-      setCurrentPage('login')
-    }
-  }, [currentPage, auth_context.isLoggedIn])
+    if (isLoggedIn && currentPage === 'login') return setCurrentPage('map')
+    setCurrentPage('login')
+  }, [isLoggedIn])
 
   return <>
-    {auth_context.isLoggedIn && <Header navigateTo={navigateTo} />}
+    {isLoggedIn && <Header navigateTo={navigateTo} />}
     <main>
       <section>
         {PAGES[currentPage]({ navigateTo })}

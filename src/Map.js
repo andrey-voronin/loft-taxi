@@ -15,7 +15,7 @@ class Map extends React.Component {
     }
 
     componentWillUnmount() {
-        this.map.remove()
+        if(this.map.remove)this.map.remove()
     }
 
     render() {
