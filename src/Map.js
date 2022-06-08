@@ -1,12 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import mapboxgl from 'mapbox-gl'
 
 class Map extends React.Component {
-    static propTypes = {
-        navigateTo: PropTypes.func.isRequired
-    }
-
     mapContainer = React.createRef()
     
     componentDidMount() {
@@ -16,7 +11,7 @@ class Map extends React.Component {
             style: 'mapbox://styles/mapbox/streets-v9',
             center: [60.58333, 56.83333],
             zoom: 12
-        })
+        })        
     }
 
     componentWillUnmount() {

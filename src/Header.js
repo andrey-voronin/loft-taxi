@@ -6,14 +6,12 @@ export const Header = (props) => {
     const auth_context = useContext(AuthContext)
     return <header>
         <nav>
-            {auth_context.isLoggedIn ? (
+
                 <ul>
                     <li><button onClick={() => props.navigateTo('map')}>Карта</button></li>
                     <li><button onClick={() => props.navigateTo('profile')}>Профиль</button></li>
-                </ul>) : (
-                <ul>
-                    <li><button onClick={() => props.navigateTo('login')}>Войти</button></li>
-                </ul>)}
+                    <li><button onClick={auth_context.logOut}>Выйти</button></li>
+                </ul>
         </nav>
     </header>
 }

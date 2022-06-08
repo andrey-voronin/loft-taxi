@@ -3,7 +3,9 @@ import { AuthContext } from './AuthContext'
 
 export const Login = (props) => {
     const auth_context = useContext(AuthContext)
-    return <form onSubmit={(event) => {
+    return <>
+    <h2>Войти</h2>
+    <form onSubmit={(event) => {
         event.preventDefault()
         const { email, password } = event.target
         auth_context.logIn(email.value, password.value)
@@ -14,4 +16,5 @@ export const Login = (props) => {
         <input type='password' name='password' id='password' size='15' />
         <input type='submit' value='Войти' />
     </form>
+    </>
 }
