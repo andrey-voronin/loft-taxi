@@ -6,7 +6,7 @@ export const authMiddleware = (store) => (next) => async (action) => {
         const { email, password } = action.payload
         const loginGranted = await serverLogIn(email, password)
         if (loginGranted) {
-            store.dispatch(logIn())
+            store.dispatch(logIn(email, password))
         }
     } else {
         next(action)

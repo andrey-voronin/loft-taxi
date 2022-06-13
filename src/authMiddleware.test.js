@@ -11,7 +11,7 @@ describe("authMiddleware", () => {
         const dispatch = jest.fn()
         await authMiddleware({dispatch})()(authenticate("testemail", "testpassword"))
         expect(serverLogIn).toBeCalledWith("testemail", "testpassword")
-        expect(dispatch).toBeCalledWith(logIn())
+        expect(dispatch).toBeCalledWith(logIn("testemail", "testpassword"))
     })
     it("with wrong credentials calls api and does not dispatch any actions", async () => {
         serverLogIn.mockImplementation(async () => false)

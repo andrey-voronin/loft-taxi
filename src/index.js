@@ -5,6 +5,14 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import { store } from "./store"
+import { saveState } from "./localStorage"
+
+store.subscribe(() => {
+  const {auth} = store.getState()
+  console.debug("auth state changed to")
+  console.debug(auth)
+  saveState(auth)
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

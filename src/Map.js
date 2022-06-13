@@ -1,12 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import mapboxgl from 'mapbox-gl'
 
 class Map extends React.Component {
-    static propTypes = {
-        navigateTo: PropTypes.func.isRequired
-    }
-
     mapContainer = React.createRef()
     
     componentDidMount() {
@@ -20,7 +15,7 @@ class Map extends React.Component {
     }
 
     componentWillUnmount() {
-        this.map.remove()
+        if(this.map)this.map.remove()
     }
 
     render() {
