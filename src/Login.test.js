@@ -5,7 +5,8 @@ import { Login } from "./Login"
 
 describe("Login", () => {
     it("renders correctly", () => {
-        render(<Login />)
+        const { container } = render(<Login />)
+        expect(container.innerHTML).toMatch("Вход")
         expect(screen.getByLabelText("E-mail")).toHaveAttribute("name", "email")
         expect(screen.getByLabelText("Пароль")).toHaveAttribute("name", "password")
     })

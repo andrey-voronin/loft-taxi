@@ -1,7 +1,7 @@
 import React from 'react'
 import Map from './Map'
 import Login from './Login'
-import { Profile } from './Profile'
+import Profile from './Profile'
 import { connect } from "react-redux"
 import { Link, Route, Switch, Redirect } from "react-router-dom"
 import PrivateRoute from "./PrivateRoute"
