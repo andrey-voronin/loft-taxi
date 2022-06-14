@@ -15,12 +15,12 @@ class Map extends React.Component {
     }
 
     componentWillUnmount() {
-        if(this.map)this.map.remove()
+        if(this.map.remove)this.map.remove()
     }
 
     render() {
         return <>
-        <h2>Map</h2>
+        <h2>Карта</h2>
         <div className="map-wrapper">
             <div className="map" ref={this.mapContainer} />
         </div>

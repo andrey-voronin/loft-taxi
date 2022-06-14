@@ -9,8 +9,6 @@ import { saveState } from "./localStorage"
 
 store.subscribe(() => {
   const {auth} = store.getState()
-  console.debug("auth state changed to")
-  console.debug(auth)
   saveState(auth)
 })
 
